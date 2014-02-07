@@ -1,0 +1,5 @@
+MyRaspiHome
+===============================================================================
+MyRaspiHome consists of the following components:
+- datalogger (HDF5 and CSV)
+- solar (interface with STECA Tarom solar charge controller)
