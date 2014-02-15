@@ -1,5 +1,5 @@
 """
-   module:: serial
+   module:: communication
    :synopsis: Exceptions raised by serial interfaces.
    
    moduleauthor:: Bernhard Hari <github@taschenwerkstatt.ch>

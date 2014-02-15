@@ -1,12 +1,12 @@
 """
-   module:: serial
+   module:: communication
    :synopsis: Wrapper class for serial interfaces.
    
    moduleauthor:: Bernhard Hari <github@taschenwerkstatt.ch>
 """
 
-from serial.exceptions import SerialConnectionError
-from serial.serial_tarom import SerialTarom
+from communication.exceptions import SerialConnectionError
+from communication.serial_tarom import SerialTarom
 
 class SerialInterface():
 
