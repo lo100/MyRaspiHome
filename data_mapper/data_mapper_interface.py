@@ -13,7 +13,7 @@ class DataMapperInterface():
     """Data mapper instance.
     """
     _mapper = None
-    
+
     def __init__(self, mapper):
         """Creates a wrapped data mapper instance.
         
@@ -24,16 +24,16 @@ class DataMapperInterface():
         if mapper == 'tarom':
             self._mapper = DataMapperTarom()
         else:
-            raise DataMapperError('Data mapper not implemented! ' + 
+            raise DataMapperError('Data mapper not implemented! ' +
                                         str(mapper))
-        
+
     def get_type(self):
         """Returns the data mapper type.
         
         :rtype: string
         """
         return self._mapper.MAPPER_TYPE
-    
+
     def map(self, data=None):
         """Returns data as a dictionary.
         
@@ -41,4 +41,4 @@ class DataMapperInterface():
         :rtype: dictionary
         """
         return self._mapper.map(data)
-    
+
