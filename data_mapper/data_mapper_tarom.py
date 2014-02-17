@@ -1,6 +1,6 @@
 """
    module:: data_mapper
-   :synopsis: Data mapper for Solar Steca Tarom charge controller.
+   :synopsis: Data mapper for Steca Tarom solar charge controller.
    
    moduleauthor:: Bernhard Hari <github@taschenwerkstatt.ch>
 """
@@ -8,11 +8,11 @@
 from data_mapper.exceptions import DataMapperError
 
 class DataMapperTarom():
-    
+
     """Mapper type.
     """
     MAPPER_TYPE = 'tarom'
-    
+
     """Protocol data in series.
     """
     PROTOCOL_DATA = (
@@ -48,24 +48,24 @@ class DataMapperTarom():
     def __init__(self):
         pass
 
-    def _is_float(self, str):
+    def _is_float(self, value):
         _float = False
         try:
-            float(str)
+            float(value)
             _float = True
         except (TypeError, ValueError):
             pass
         return _float
-            
-    def _is_integer(self, str):
+
+    def _is_integer(self, value):
         _integer = False
         try:
-            int(str)
+            int(value)
             _integer = True
         except (TypeError, ValueError):
             pass
         return _integer
-    
+
     def map(self, data=None):
         """Returns data as a dictionary.
         
@@ -74,18 +74,18 @@ class DataMapperTarom():
         """
         position = 0
         dictionary = {}
-        
+
         data.strip()
         data_array = data.split(';')
-        
+
         # check if length equal protocol data array
         if len(data_array) != len(self.PROTOCOL_DATA):
-            raise DataMapperError('Invalid data length, expected ' + 
-                                  str(len(self.PROTOCOL_DATA)) + 
-                                  ' got ' + 
-                                  str(len(data_array)) + 
+            raise DataMapperError('Invalid data length, expected ' +
+                                  str(len(self.PROTOCOL_DATA)) +
+                                  ' got ' +
+                                  str(len(data_array)) +
                                   ' data items!')
-        
+
         for item in data_array:
             value = None
             if item != '#':
@@ -93,15 +93,15 @@ class DataMapperTarom():
                 if position == (len(self.PROTOCOL_DATA) - 1):
                     value = item
                 elif self._is_integer(item):
-                    value = int(item)                
+                    value = int(item)
                 elif self._is_float(item):
                     value = float(item)
                 else:
                     value = item
-            
+
             dictionary[self.PROTOCOL_DATA[position]] = value
             position += 1
-            
+
         return dictionary
-    
+
 
