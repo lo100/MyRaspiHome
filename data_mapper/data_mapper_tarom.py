@@ -45,6 +45,11 @@ class DataMapperTarom():
         'Checksum',
     )
 
+    """The frequency / sample rate.
+    One sample per minute.
+    """
+    FREQUENCY = 0.0166666666666667
+
     def __init__(self):
         pass
 
@@ -66,15 +71,13 @@ class DataMapperTarom():
             pass
         return _integer
 
-    def map(self, data=None):
+    def _map_single_recording(self, data=None):
         """Returns data as a dictionary.
         
         :param data: data returned by charge controller
+        :type data: data string with EOL
         :rtype: dictionary
         """
-        position = 0
-        dictionary = {}
-
         data.strip()
         data_array = data.split(';')
 
@@ -86,7 +89,10 @@ class DataMapperTarom():
                                   str(len(data_array)) +
                                   ' data items!')
 
-        for item in data_array:
+        dictionary = {}
+        dictionary['FREQUENCY'] = self.FREQUENCY
+
+        for position, item in enumerate(data_array, start=0):
             value = None
             if item != '#':
                 # special handling for checksum - can be string or integer
@@ -100,8 +106,24 @@ class DataMapperTarom():
                     value = item
 
             dictionary[self.PROTOCOL_DATA[position]] = value
-            position += 1
 
         return dictionary
+
+    def map(self, data=None):
+        """Returns data as a list of dictionaries.
+        
+        :param data: list of data returned by charge controller
+        :type data: list of strings
+        :rtype: list of dictionaries
+        """
+        dictionaries = []
+
+        for recording in data:
+            dictionary = self._map_single_recording(recording)
+            dictionaries.append(dictionary)
+
+        return dictionaries
+
+
 
 
