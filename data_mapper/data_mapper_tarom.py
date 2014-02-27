@@ -6,6 +6,7 @@
 """
 
 from data_mapper.exceptions import DataMapperError
+from common.time import get_offset
 
 class DataMapperTarom():
 
@@ -91,6 +92,7 @@ class DataMapperTarom():
 
         dictionary = {}
         dictionary['FREQUENCY'] = self.FREQUENCY
+        dictionary['OFFSET'] = get_offset(data_array[2] + ':00', self.FREQUENCY)
 
         for position, item in enumerate(data_array, start=0):
             value = None
@@ -111,6 +113,13 @@ class DataMapperTarom():
 
     def map(self, data=None):
         """Returns data as a list of dictionaries.
+        
+        A single dictionary must contain the following keys:
+        FREQUENCY : The frequency / sample rate.
+        OFFSET : The dataset offset (index) for the recording starting from midnight
+            e.g. 07:00:00 --> 1 Hz sample rate
+                 --> (7 (hours) * 60 (minutes) * 60 (seconds)) * 1 (frequency)
+                 ==> 25200
         
         :param data: list of data returned by charge controller
         :type data: list of strings

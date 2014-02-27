@@ -30,6 +30,7 @@ class TestDataMapperTarom(unittest.TestCase):
         actual = dm.map(recordings)
 
         expected = {'FREQUENCY' : 0.0166666666666667,
+                    'OFFSET' : 820,
                     'Version' : 1,
                     'Date' : '2014/02/06',
                     'Time' : '13:40',
@@ -61,6 +62,7 @@ class TestDataMapperTarom(unittest.TestCase):
         self.assertEqual(actual[0], expected)
 
         expected = {'FREQUENCY' : 0.0166666666666667,
+                    'OFFSET' : 875,
                     'Version' : 1,
                     'Date' : '2014/02/06',
                     'Time' : '14:35',
