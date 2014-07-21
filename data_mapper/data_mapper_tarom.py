@@ -14,7 +14,7 @@ class DataMapperTarom():
     """
     MAPPER_TYPE = 'tarom'
 
-    """Protocol data in series.
+    """Protocol data in order.
     """
     PROTOCOL_DATA = (
         'Version',
@@ -46,6 +46,40 @@ class DataMapperTarom():
         'Checksum',
     )
 
+    """Data configuration.
+    """
+    DATA_CONFIGURATION = {
+        'FREQUENCY':{'type':'float64', 'attribute':True},
+        'OFFSET':{'type':'int16', 'attribute':True},
+        'Version':{'type':'int8', 'attribute':True},
+        'Date':{'type':'S10', 'attribute':True},
+        'Time':{'type':'S5', 'attribute':None},
+        'Battery Voltage':{'type':'float32', 'attribute':False},
+        'Module Voltage 1':{'type':'float32', 'attribute':False},
+        'Module Voltage 2':{'type':'float32', 'attribute':False},
+        'State Of Charge':{'type':'float32', 'attribute':False},
+        'State Of Health':{'type':'float32', 'attribute':False},
+        'Total Battery Current':{'type':'float32', 'attribute':False},
+        'Max Input Current Module 1':{'type':'float32', 'attribute':False},
+        'Max Input Current Module 2':{'type':'float32', 'attribute':False},
+        'Module Input Current':{'type':'float32', 'attribute':False},
+        'Total Charge Current':{'type':'float32', 'attribute':False},
+        'Device Load Current':{'type':'float32', 'attribute':False},
+        'Total Current':{'type':'float32', 'attribute':False},
+        'Temperature Battery Sensor':{'type':'float32', 'attribute':False},
+        'Error Status':{'type':'int8', 'attribute':False},
+        'Charging Mode':{'type':'S3', 'attribute':False},
+        'Load Switch':{'type':'int8', 'attribute':False},
+        'Auxiliary 1':{'type':'int8', 'attribute':False},
+        'Auxiliary 2':{'type':'int8', 'attribute':False},
+        'Max Ah Battery 24 Hours':{'type':'float32', 'attribute':False},
+        'Total Ah Battery':{'type':'float32', 'attribute':False},
+        'Max Ah Load 24 Hours':{'type':'float32', 'attribute':False},
+        'Total Ah Load':{'type':'float32', 'attribute':False},
+        'Derating':{'type':'int8', 'attribute':False},
+        'Checksum':{'type':'S4', 'attribute':False},
+    }
+    
     """The frequency / sample rate.
     One sample per minute.
     """
@@ -84,10 +118,10 @@ class DataMapperTarom():
 
         # check if length equal protocol data array
         if len(data_array) != len(self.PROTOCOL_DATA):
-            raise DataMapperError('Invalid data length, expected ' +
-                                  str(len(self.PROTOCOL_DATA)) +
-                                  ' got ' +
-                                  str(len(data_array)) +
+            raise DataMapperError('Invalid data length, expected ' + 
+                                  str(len(self.PROTOCOL_DATA)) + 
+                                  ' got ' + 
+                                  str(len(data_array)) + 
                                   ' data items!')
 
         dictionary = {}
