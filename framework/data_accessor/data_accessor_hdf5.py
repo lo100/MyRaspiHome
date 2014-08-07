@@ -26,7 +26,15 @@ class DataAccessorHDF5():
         # create root node if not exist
         root_node = 'series'
         if root_node not in self._file['/'].keys():
-                self._file.create_group(root_node)
+            self._file['/'].attrs['CLASS'] = 'GROUP'
+            self._file['/'].attrs['PYTABLES_FORMAT_VERSION'] = '2.1'
+            self._file['/'].attrs['TITLE'] = 'Root element'
+            self._file['/'].attrs['VERSION'] = '1.0'
+            self._file.create_group(root_node)
+            group_node = '/' + root_node
+            self._file[group_node].attrs['CLASS'] = 'GROUP'
+            self._file[group_node].attrs['TITLE'] = 'groupnode'
+            self._file[group_node].attrs['VERSION'] = '1.0' 
         return '/' + root_node
     
     def _create_source_node(self, source=None):
@@ -37,6 +45,9 @@ class DataAccessorHDF5():
             source_node += '/' + source
             if source not in self._file[root_node].keys():
                 self._file.create_group(source_node)
+                self._file[source_node].attrs['CLASS'] = 'GROUP'
+                self._file[source_node].attrs['TITLE'] = 'groupnode'
+                self._file[source_node].attrs['VERSION'] = '1.0'  
         return source_node
             
     def open(self, filename, mode='a'):
@@ -135,6 +146,15 @@ class DataAccessorHDF5():
                     if param not in self._file[source_node].keys():
                         dataset_values = self._file.create_dataset(data_node, (initial_size,), dtype=configuration[param]['type'])
                         dataset_masked = self._file.create_dataset(mask_node, (initial_size, 1), dtype=np.int8)
+                        self._file[node].attrs['CLASS'] = 'GROUP'
+                        self._file[node].attrs['TITLE'] = 'groupnode'
+                        self._file[node].attrs['VERSION'] = '1.0' 
+                        self._file[data_node].attrs['CLASS'] = 'ARRAY'
+                        self._file[data_node].attrs['TITLE'] = 'data array'
+                        self._file[data_node].attrs['VERSION'] = '2.4'
+                        self._file[mask_node].attrs['CLASS'] = 'ARRAY'
+                        self._file[mask_node].attrs['TITLE'] = 'mask array'
+                        self._file[mask_node].attrs['VERSION'] = '2.4'
                     else:
                         dataset_values = self._file[data_node]
                         dataset_masked = self._file[mask_node]
