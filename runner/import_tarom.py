@@ -60,7 +60,7 @@ for sample in data:
         
     if int(date[0]) != current_year or int(date[1]) != current_month or int(date[2]) != current_day or index == lastindex:
         # write data to HDF5 file
-        folderName = 'E:\\wa_git\\output\\' + folderDate
+        folderName = 'E:\\home\\' + folderDate
         if not os.path.exists(folderName):
             os.makedirs(folderName)
         hdf5_filename = folderName + '\\logfile_' + hdfDate + '.hdf5'
