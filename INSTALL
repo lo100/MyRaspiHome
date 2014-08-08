@@ -1,0 +1,5 @@
+# Setup environment if vcvarsall.bat (Microsoft Visual Studio) is requested
+# -------------------------------------------------------------------------
+VS100COMNTOOLS=c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\Tools\
+SET VS90COMNTOOLS=%VS100COMNTOOLS%
+pip install --upgrade pandas
