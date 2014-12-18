@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 
 #
-# python sample application that reads serial data from RX/TX - GPIO ports
+# python sample application that reads serial data from RX/TX using the GPIO ports
 #
 
 import array
 import serial
 
-maxReadCount=105
+from time import gmtime, strftime
+
+maxReadCount = 105
 readBuffer = array.array('c')
 
 print('this sample application reads from the rs-232 port')
@@ -30,9 +32,11 @@ except:
 
 print('successful.')
 
+filename = '/var/log/solar/log_' + strftime("%Y%m%d", gmtime()) + '.txt'
+logfile = file(filename, 'w')
+
 # print the received bytes
 print('we received the following bytes:')
-logfile = file('logfile.txt','w')
 while True:
     data = ser.readline()
     print(data)
@@ -40,5 +44,4 @@ while True:
     logfile.flush()
 logfile.close()
 
-    
 
