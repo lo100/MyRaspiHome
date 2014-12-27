@@ -1,16 +1,20 @@
-Setup
+Setup instructions
 ===============================================================================
-1. Boot into terminal
-2. pi/pi as default
-3. reconfigure keyboard to de_CH
-   dpkg-reconfigure keyboard-configuration
-4. Install python serial (not needed)
-   sudo apt-get install python-serial
-5. mkdir ~/solar
-6. copy rs232_read_multiple.py into ~/solar
-   sudo mkdir /media/disk
-   mount usb-disk => sudo mount /dev/sda1 /media/disk
-7. create log directory
-   sudo mkdir -p /var/log/solar
-7. edit /etc/rc.local and add
-   /usr/bin/python2 /home/pi/solar/rs232_read_multiple.py &
+1.  Boot into terminal
+2.  pi/pi as default
+3.  reconfigure keyboard to de_CH
+    dpkg-reconfigure keyboard-configuration
+4.  Install python serial (not needed)
+    sudo apt-get install python-serial
+5.  mkdir ~/solar
+6.  copy rs232_read_multiple.py into ~/solar
+    sudo mkdir /media/disk
+    mount usb-disk => sudo mount /dev/sda1 /media/disk
+7.  create log directory
+    sudo mkdir -p /var/log/solar
+7.  edit /etc/rc.local and add
+    /usr/bin/python /home/pi/solar/rs232_read_multiple.py &
+8.  edit /etc/inittab and disable/comment, add #
+    T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100
+9.  reboot system
+10. data is logged to /var/log/solar/log_<date>_<time>.txt
