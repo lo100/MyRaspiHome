@@ -4,8 +4,13 @@ Howto Django
 
 Install django
 -------------------------------------------------------------------------------
-pin install django
+pip install django
 pip install django-extensions
+
+Install django on windows using anaconda
+-------------------------------------------------------------------------------
+conda install django
+conda install -c https://conda.anaconda.org/ioos django-extensions
 
 add  to settings.py
 INSTALLED_APPS = (
