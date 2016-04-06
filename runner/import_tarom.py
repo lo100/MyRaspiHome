@@ -37,8 +37,8 @@ da = DataAccessorHDF5()
 
 # initialize variables
 current_year = 1970
-current_month = 01
-current_day = 01
+current_month = 1
+current_day = 1
 offset = 0
 index = 0
 lastindex = len(data) - 1
@@ -60,7 +60,7 @@ for sample in data:
         
     if int(date[0]) != current_year or int(date[1]) != current_month or int(date[2]) != current_day or index == lastindex:
         # write data to HDF5 file
-        folderName = 'E:\\home\\' + folderDate
+        folderName = 'C:\\Data\\wa\home\\' + folderDate
         if not os.path.exists(folderName):
             os.makedirs(folderName)
         hdf5_filename = folderName + '\\logfile_' + hdfDate + '.hdf5'
