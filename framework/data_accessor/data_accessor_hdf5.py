@@ -129,13 +129,19 @@ class DataAccessorHDF5():
                 node = source_node + '/' + param
                 data_node = node + '/data'
                 mask_node = node + '/mask'
-                
+
+                # TODO: fix for python 3, HDF supports UTF-8 and ASCII
+                # ----------------------------------------------------
+                val = value
+                if isinstance(value, str) == True:
+                    val = value.encode('utf8')
+                            
                 # write attribute
                 # ---------------
                 if configuration[param]['attribute'] == True:
                     # add attribute if not already exists
                     if param not in self._file[source_node].attrs:
-                        self._file[source_node].attrs[param] = value
+                        self._file[source_node].attrs[param] = val
                         
                 # write parameter
                 # ---------------
@@ -159,8 +165,8 @@ class DataAccessorHDF5():
                         dataset_values = self._file[data_node]
                         dataset_masked = self._file[mask_node]
                     
-                    if value != None:
-                        dataset_values[offset] = value
+                    if val != None:
+                        dataset_values[offset] = val
                         dataset_masked[offset] = 0
                 # else: attribute == None
                  

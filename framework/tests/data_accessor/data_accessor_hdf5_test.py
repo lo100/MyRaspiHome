@@ -23,7 +23,7 @@ class TestDataAccessorHDF5(unittest.TestCase):
         da = DataAccessorHDF5()
         
         # write data to file
-        da.open('E:\\wa_git\\output\\unittest.hdf5', 'w')
+        da.open('C:\\Data\\wa\\MyRaspiHome\\output\\unittest.hdf5', 'w')
         configuration = {'float':{'type':'float32', 'attribute':False},
                         'integer':{'type':'int16', 'attribute':False},
                         'string':{'type':'S3', 'attribute':False},
@@ -32,22 +32,22 @@ class TestDataAccessorHDF5(unittest.TestCase):
         recordings = []
         recordings.append({'float' : 0.1234,
                     'integer' : 1234,
-                    'string' : 'abc',
-                    'attr1' : '1234',
-                    'attr2' : 'rec01',
+                    'string' : 'abc'.encode('utf_8'),
+                    'attr1' : '1234'.encode('utf_8'),
+                    'attr2' : 'rec01'.encode('utf_8'),
                     })
         recordings.append({'float' : 0.5678,
                     'integer' : 5678,
-                    'string' : 'def',
-                    'attr1' : '2345',
-                    'attr2' : 'rec02',
+                    'string' : 'def'.encode('utf_8'),
+                    'attr1' : '2345'.encode('utf_8'),
+                    'attr2' : 'rec02'.encode('utf_8'),
                     })
         
         da.write('unittest', recordings, configuration)
         da.close()
         
         # read data from file
-        da.open('E:\\wa_git\\output\\unittest.hdf5', 'r')
+        da.open('C:\\Data\\wa\\MyRaspiHome\\output\\unittest.hdf5', 'r')
         parameter = ('float', 'integer', 'string', 'attr1', 'attr2')
         data = da.read('unittest', parameter)
         self.assertEqual(data['float'][0], np.float32(recordings[0]['float']))
