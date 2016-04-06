@@ -1,7 +1,7 @@
 import unittest
 import sys
 import logging
-from mock import patch
+from unittest.mock import patch
 
 from communication.serial_interface import SerialInterface
 from communication.exceptions import SerialConnectionError

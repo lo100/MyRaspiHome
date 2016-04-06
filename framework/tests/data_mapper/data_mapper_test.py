@@ -1,7 +1,7 @@
 import unittest
 import sys
 import logging
-from mock import patch
+from unittest.mock import patch
 
 from data_mapper.data_mapper_interface import DataMapperInterface
 from data_mapper.exceptions import DataMapperError

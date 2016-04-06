@@ -1,7 +1,7 @@
 import unittest
 import sys
 import logging
-from mock import patch
+from unittest.mock import patch
 
 from data_accessor.data_accessor_interface import DataAccessorInterface
 from data_accessor.exceptions import DataAccessorError
